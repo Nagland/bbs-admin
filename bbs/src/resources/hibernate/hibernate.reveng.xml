@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<table-filter match-name="forum"></table-filter>
+	<table-filter match-name="reply"></table-filter>
+	<table-filter match-name="subforum"></table-filter>
+	<table-filter match-name="topic"></table-filter>
+	<table-filter match-name="user"></table-filter>
+</hibernate-reverse-engineering>
