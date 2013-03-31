@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true"></constant>
+	<constant name="struts.ognl.allowStaticMethodAccess" value="false" /> 
+	<!-- 上传文件大小限制为10M -->
+	<constant name="struts.mutipart.maxSize" value="10485769"/>
+	<!--  
+	<include file="struts/customer.xml"></include>
+	<include file="struts/admin.xml"></include>
+	-->
+</struts>
