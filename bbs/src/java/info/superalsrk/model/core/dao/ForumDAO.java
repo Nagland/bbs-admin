@@ -11,7 +11,7 @@ public interface ForumDAO {
 	
 	public void update(Forum forum);
 	
-	public void delete(Forum delete);
+	public void delete(Forum forum);
 	
 	public Forum queryById(int id);
 	
