@@ -41,10 +41,15 @@ public class SubforumDAOImpl implements SubforumDAO {
 		return hibernateTemplate.get(Subforum.class, id);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Subforum> queryByForum(int forumid) {
-		// TODO Auto-generated method stub
-		return null;
+		String hql = "from Subforum where forum_id = ?";
+		List<Subforum> subForums = (List<Subforum>) hibernateTemplate.find(hql, new Object[]{forumid});
+		if(null == subForums || subForums.size() <= 0) 
+			return null;
+		return subForums;
+		
 	}
 	
 	public HibernateTemplate getHibernateTemplate() {

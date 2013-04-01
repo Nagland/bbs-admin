@@ -62,7 +62,7 @@ public class User implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "userName", length = 20)
+	@Column(name = "userName", unique = true, length = 20)
 	public String getUserName() {
 		return this.userName;
 	}
@@ -71,7 +71,7 @@ public class User implements java.io.Serializable {
 		this.userName = userName;
 	}
 
-	@Column(name = "nickName", length = 20)
+	@Column(name = "nickName", unique = true, length = 20)
 	public String getNickName() {
 		return this.nickName;
 	}

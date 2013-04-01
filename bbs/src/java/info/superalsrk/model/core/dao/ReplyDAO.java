@@ -15,4 +15,6 @@ public interface ReplyDAO {
 	public void delete(Reply reply);
 	
 	public Reply queryById(String id);
+	
+	public List<Reply> queryByPage(int pageNum,int pageSize,String topicId);
 }

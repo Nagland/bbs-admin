@@ -15,4 +15,6 @@ public interface TopicDAO {
 	public void delete(Topic topic);
 	
 	public Topic queryById(String id);
+	
+	public List<Topic> queryByPage(int pageNum,int pageSize,int subForumId);
 }
