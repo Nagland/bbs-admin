@@ -1,10 +1,14 @@
 package info.superalsrk.model.core.entity;
 
-// Generated 2013-3-30 18:00:53 by Hibernate Tools 3.4.0.CR1
+// Generated 2013-4-2 11:21:36 by Hibernate Tools 3.4.0.CR1
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -32,7 +36,7 @@ public class Topic implements java.io.Serializable {
 	private Date postTime;
 	private Date lastreplyTime;
 	private String topicContent;
-	private Set<Reply> replies = new HashSet<Reply>(0);
+	private List<Reply> replies = new ArrayList<Reply>();
 
 	public Topic() {
 	}
@@ -42,7 +46,7 @@ public class Topic implements java.io.Serializable {
 	}
 
 	public Topic(String id, Subforum subforum, User user, Date postTime,
-			Date lastreplyTime, String topicContent, Set<Reply> replies) {
+			Date lastreplyTime, String topicContent, List<Reply> replies) {
 		this.id = id;
 		this.subforum = subforum;
 		this.user = user;
@@ -63,7 +67,7 @@ public class Topic implements java.io.Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
-
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "subforum_id")
 	public Subforum getSubforum() {
@@ -84,6 +88,7 @@ public class Topic implements java.io.Serializable {
 		this.user = user;
 	}
 
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "postTime", length = 19)
 	public Date getPostTime() {
@@ -104,7 +109,7 @@ public class Topic implements java.io.Serializable {
 		this.lastreplyTime = lastreplyTime;
 	}
 
-	@Column(name = "topicContent", length = 65535)
+	@Column(name = "topicContent", length=10000)
 	public String getTopicContent() {
 		return this.topicContent;
 	}
@@ -113,13 +118,15 @@ public class Topic implements java.io.Serializable {
 		this.topicContent = topicContent;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "topic")
-	public Set<Reply> getReplies() {
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "topic",cascade=CascadeType.ALL)
+	public List<Reply> getReplies() {
 		return this.replies;
 	}
 
-	public void setReplies(Set<Reply> replies) {
+	public void setReplies(List<Reply> replies) {
 		this.replies = replies;
 	}
+	
 
 }

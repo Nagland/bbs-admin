@@ -1,9 +1,13 @@
 package info.superalsrk.model.core.entity;
 
-// Generated 2013-3-30 18:00:53 by Hibernate Tools 3.4.0.CR1
+// Generated 2013-4-2 11:21:36 by Hibernate Tools 3.4.0.CR1
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,9 +30,9 @@ public class User implements java.io.Serializable {
 	private String nickName;
 	private String password;
 	private String email;
-	private Set<Topic> topics = new HashSet<Topic>(0);
-	private Set<Reply> replies = new HashSet<Reply>(0);
-	private Set<Subforum> subforums = new HashSet<Subforum>(0);
+	private List<Topic> topics = new ArrayList<Topic>();
+	private List<Reply> replies = new ArrayList<Reply>();
+	private List<Subforum> subforums = new ArrayList<Subforum>();
 
 	public User() {
 	}
@@ -38,8 +42,7 @@ public class User implements java.io.Serializable {
 	}
 
 	public User(String id, String userName, String nickName, String password,
-			String email, Set<Topic> topics, Set<Reply> replies,
-			Set<Subforum> subforums) {
+			String email, List<Topic> topics, List<Reply> replies, List<Subforum> subforums) {
 		this.id = id;
 		this.userName = userName;
 		this.nickName = nickName;
@@ -62,7 +65,7 @@ public class User implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "userName", unique = true, length = 20)
+	@Column(name = "userName", length = 20)
 	public String getUserName() {
 		return this.userName;
 	}
@@ -71,7 +74,7 @@ public class User implements java.io.Serializable {
 		this.userName = userName;
 	}
 
-	@Column(name = "nickName", unique = true, length = 20)
+	@Column(name = "nickName", length = 20)
 	public String getNickName() {
 		return this.nickName;
 	}
@@ -98,30 +101,31 @@ public class User implements java.io.Serializable {
 		this.email = email;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	public Set<Topic> getTopics() {
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user",cascade=CascadeType.ALL)
+	public List<Topic> getTopics() {
 		return this.topics;
 	}
 
-	public void setTopics(Set<Topic> topics) {
+	public void setTopics(List<Topic> topics) {
 		this.topics = topics;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	public Set<Reply> getReplies() {
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user",cascade=CascadeType.ALL)
+	public List<Reply> getReplies() {
 		return this.replies;
 	}
 
-	public void setReplies(Set<Reply> replies) {
+	public void setReplies(List<Reply> replies) {
 		this.replies = replies;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	public Set<Subforum> getSubforums() {
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user",cascade=CascadeType.ALL)
+	public List<Subforum> getSubforums() {
 		return this.subforums;
 	}
 
-	public void setSubforums(Set<Subforum> subforums) {
+	public void setSubforums(List<Subforum> subforums) {
 		this.subforums = subforums;
 	}
 

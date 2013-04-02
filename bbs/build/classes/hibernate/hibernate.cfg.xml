@@ -3,11 +3,21 @@
 		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
 		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-    <session-factory>
-        <property name="hibernate.connection.driver_class">org.gjt.mm.mysql.Driver</property>
-        <property name="hibernate.connection.password">1234</property>
-        <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/bbs</property>
-        <property name="hibernate.connection.username">omoika</property>
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
-    </session-factory>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">org.gjt.mm.mysql.Driver</property>
+		<property name="hibernate.connection.password">1234</property>
+		<property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/bbs</property>
+		<property name="hibernate.connection.username">omoika</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+		<property name="hibernate.hbm2ddl.auto">create</property>
+
+		
+		<mapping class="info.superalsrk.model.core.entity.Topic"></mapping>
+		<mapping class="info.superalsrk.model.core.entity.Forum"></mapping>
+		<mapping class="info.superalsrk.model.core.entity.Subforum"></mapping>
+		<mapping class="info.superalsrk.model.core.entity.User"></mapping>
+		<mapping class="info.superalsrk.model.core.entity.Reply"></mapping>
+		
+		
+	</session-factory>
 </hibernate-configuration>

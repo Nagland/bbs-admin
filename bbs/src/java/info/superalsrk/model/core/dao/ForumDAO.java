@@ -1,9 +1,11 @@
 package info.superalsrk.model.core.dao;
 
+import info.superalsrk.model.core.entity.Forum;
+
 import java.util.List;
 import org.springframework.stereotype.Component;
 
-import info.superalsrk.model.core.entity.Forum;
+
 
 @Component
 public interface ForumDAO {

@@ -1,10 +1,14 @@
 package info.superalsrk.model.core.entity;
 
-// Generated 2013-3-30 18:00:53 by Hibernate Tools 3.4.0.CR1
+// Generated 2013-4-2 11:21:36 by Hibernate Tools 3.4.0.CR1
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -32,7 +36,7 @@ public class Reply implements java.io.Serializable {
 	private Reply reply;
 	private Date replyTime;
 	private String replyContent;
-	private Set<Reply> replies = new HashSet<Reply>(0);
+	private List<Reply> replies = new ArrayList<Reply>();
 
 	public Reply() {
 	}
@@ -42,7 +46,7 @@ public class Reply implements java.io.Serializable {
 	}
 
 	public Reply(String id, User user, Topic topic, Reply reply,
-			Date replyTime, String replyContent, Set<Reply> replies) {
+			Date replyTime, String replyContent, List<Reply> replies) {
 		this.id = id;
 		this.user = user;
 		this.topic = topic;
@@ -104,7 +108,7 @@ public class Reply implements java.io.Serializable {
 		this.replyTime = replyTime;
 	}
 
-	@Column(name = "replyContent", length = 65535)
+	@Column(name = "replyContent", length = 10000)
 	public String getReplyContent() {
 		return this.replyContent;
 	}
@@ -113,12 +117,12 @@ public class Reply implements java.io.Serializable {
 		this.replyContent = replyContent;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "reply")
-	public Set<Reply> getReplies() {
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "reply",cascade=CascadeType.ALL)
+	public List<Reply> getReplies() {
 		return this.replies;
 	}
 
-	public void setReplies(Set<Reply> replies) {
+	public void setReplies(List<Reply> replies) {
 		this.replies = replies;
 	}
 
