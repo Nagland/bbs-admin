@@ -1,5 +1,8 @@
 package info.superalsrk.model.core.dao.impl;
 
+import info.superalsrk.model.core.dao.SubforumDAO;
+import info.superalsrk.model.core.entity.Subforum;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,57 +10,58 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Component;
 
-import info.superalsrk.model.core.dao.SubforumDAO;
-import info.superalsrk.model.core.entity.Subforum;
-
-
 @Component(value="subforumDAO")
 public class SubforumDAOImpl implements SubforumDAO {
 
-	@Autowired
-	@Qualifier("hibernateTemplate")
+	@Autowired@Qualifier("hibernateTemplate")
 	private HibernateTemplate hibernateTemplate;
 	
-	@Override
 	public void save(Subforum subforum) {
 		hibernateTemplate.save(subforum);
-
 	}
 
-	@Override
 	public void update(Subforum subforum) {
 		hibernateTemplate.update(subforum);
-
 	}
 
-	@Override
 	public void delete(Subforum subforum) {
 		hibernateTemplate.delete(subforum);
-
 	}
 
-	@Override
-	public Subforum queryById(int id) {
+	public Subforum queryById(Integer id) {
 		return hibernateTemplate.get(Subforum.class, id);
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
-	public List<Subforum> queryByForum(int forumid) {
-		String hql = "from Subforum where forum_id = ?";
-		List<Subforum> subForums = (List<Subforum>) hibernateTemplate.find(hql, new Object[]{forumid});
-		if(null == subForums || subForums.size() <= 0) 
+	public List<Subforum> loadAll() {
+		String hql = "from Subforum order by orderSequence";
+		List <Subforum> res = hibernateTemplate.find(hql);
+		if(null != res && res.size() > 0) {
+			return res;
+		} else {
 			return null;
-		return subForums;
-		
+		}
 	}
 	
-	public HibernateTemplate getHibernateTemplate() {
-		return hibernateTemplate;
+	@SuppressWarnings("unchecked")
+	public List <Subforum> loadByForum(Integer id) {
+		String hql = "from Subforum where forumId = ? order by orderSequence";
+		List <Subforum> res = hibernateTemplate.find(hql, new Object[]{id});
+		if(null != res && res.size() > 0) {
+			return res;
+		} else {
+			return null;
+		}
 	}
 
-	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
-		this.hibernateTemplate = hibernateTemplate;
+	public int maxId() {
+		String hql = "select max(id) from Subforum";
+		Object obj = hibernateTemplate.find(hql).get(0);
+		if(null == obj) {
+			return 1;
+		} else {
+			return (Integer) obj;
+		}
 	}
 
 }

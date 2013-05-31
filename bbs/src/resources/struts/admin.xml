@@ -5,13 +5,52 @@
 <struts>
 	<package name="admin" extends="struts-default" namespace="/admin">
 		
-		<default-action-ref name="login"></default-action-ref>	
+		
+		<global-results>
+        	<result name="login">/admin/login.jsp</result>
+		</global-results>
+		
 		
 		<action name="login" class="info.superalsrk.control.struts.admin.LoginAction">
-		<result name="success">/admin/success.jsp</result>
+			<result name="signin">/admin/addUser.jsp</result>
+			<result name="logout" type="redirect">/admin/login.jsp</result>
+		</action>	
+		
+		<action name="user" class="info.superalsrk.control.struts.admin.UserAction">
+			<result name="list">/admin/queryUser.jsp</result>
+			<result name="added" type="redirect">user!search.action</result>
+			<result name="edit">/admin/updateUser.jsp</result>
+			<result name="updated" type="redirect">user!search.action</result>
+			<result name="psedit">/admin/changePassword.jsp</result>
+			<result name="pschanged" type="redirect">user!search.action</result>
 		</action>
 		
+		<action name="forum" class="info.superalsrk.control.struts.admin.ForumAction">
+			<result name="list">/admin/queryForum.jsp</result>
+			<result name="added" type="redirect">forum!load.action</result>
+			<result name="edit">/admin/updateForum.jsp</result>
+			<result name="updated" type="redirect">forum!load.action</result>
+			<result name="co">/admin/changeForumOrder.jsp</result>
+			<result name="forumList">/admin/selectForum.jsp</result>
+		</action>
+		
+		<action name="sub" class="info.superalsrk.control.struts.admin.SubforumAction">
+			<result name="finished">/admin/querySub.jsp</result>
+			<result name="edit">/admin/updateSub.jsp</result>
+			<result name="list">/admin/changeSubOrder.jsp</result>
+		</action>
+	  
+
+	</package>
 	
+	<package name="adminajax" extends="json-default" namespace="/adminajax">
+		<action name="forum" class="info.superalsrk.control.ajax.admin.ForumAction">
+			<result type="json"></result>
+		</action>
+		<action name="sub" class="info.superalsrk.control.ajax.admin.SubforumAction">
+			<result type="json"></result>
+		</action>
+		
 	</package>
 	
 	

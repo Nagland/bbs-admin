@@ -13,8 +13,8 @@
 		name="def"></default-action-ref> <action name="def" class="info.superalsrk.control.struts.customer.LoginAction"> 
 		<result name="success">/admin/success.jsp</result> </action> </package> -->
 		
+
 	<include file="struts/admin.xml"></include>
-	
-	<include file="struts/customer.xml"></include>
+
 
 </struts>

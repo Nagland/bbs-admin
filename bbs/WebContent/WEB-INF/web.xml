@@ -5,6 +5,18 @@
 	id="WebApp_ID" version="2.5">
 	<display-name>bbs</display-name>
 
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>/WEB-INF/log4j.xml</param-value>
+	</context-param>
+	<context-param>
+		<param-name>log4jRefreshInterval</param-name>
+		<param-value>60000</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+	
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
@@ -17,19 +29,15 @@
 
 
 	<filter>
+   	 <filter-name>AdminLoginFilter</filter-name>
+   	 <filter-class>info.superalsrk.control.filter.AdminLoginFilter</filter-class>
+  	</filter>
+
+	<filter>
 		<filter-name>struts2</filter-name>
 		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
 		
 	</filter>
-
-	<filter-mapping>
-		<filter-name>struts2</filter-name>
-		<url-pattern>/*</url-pattern>
-		<dispatcher>REQUEST</dispatcher>   
-  		<dispatcher>FORWARD</dispatcher>   
-  		<dispatcher>INCLUDE</dispatcher>
-	</filter-mapping>
-
 
     <filter>
  		<filter-name>struts-cleanup</filter-name>
@@ -39,7 +47,21 @@
 	</filter>
 
 
-<filter-mapping>
+
+	<filter-mapping>
+    	<filter-name>AdminLoginFilter</filter-name>
+    	<url-pattern>/admin/*</url-pattern>
+  	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>   
+  		<dispatcher>FORWARD</dispatcher>   
+  		<dispatcher>INCLUDE</dispatcher>
+	</filter-mapping>
+
+	<filter-mapping>
  		<filter-name>struts-cleanup</filter-name>
  		<url-pattern>/*</url-pattern>
 	</filter-mapping>
@@ -47,7 +69,7 @@
 
 
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>admin/login.jsp</welcome-file>
 		<welcome-file>index.htm</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
 		<welcome-file>default.html</welcome-file>

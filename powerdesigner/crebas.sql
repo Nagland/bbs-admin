@@ -1,8 +1,10 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2013/3/30 14:35:17                           */
+/* Created on:     2013/5/27 15:38:15                           */
 /*==============================================================*/
 
+
+drop table if exists Admin;
 
 drop table if exists Forum;
 
@@ -15,11 +17,22 @@ drop table if exists Topic;
 drop table if exists User;
 
 /*==============================================================*/
+/* Table: Admin                                                 */
+/*==============================================================*/
+create table Admin
+(
+   id                   int not null auto_increment,
+   adminName            varchar(32),
+   password             varchar(32),
+   primary key (id)
+);
+
+/*==============================================================*/
 /* Table: Forum                                                 */
 /*==============================================================*/
 create table Forum
 (
-   id                   int not null,
+   id                   int not null auto_increment,
    name                 varchar(20),
    description          varchar(50),
    primary key (id)
@@ -30,12 +43,12 @@ create table Forum
 /*==============================================================*/
 create table Reply
 (
-   id                   varchar(32) not null,
-   replyPoster          varchar(32),
-   topic_id             varchar(32),
+   id                   int not null auto_increment,
+   replyPoster          int,
+   topic_id             int,
    replyTime            datetime,
-   replyContent         text,
-   reply_id             varchar(32),
+   replyContent         varchar(2028),
+   reply_id             int,
    primary key (id)
 );
 
@@ -44,11 +57,14 @@ create table Reply
 /*==============================================================*/
 create table SubForum
 (
-   id                   int not null,
-   name                 varchar(20),
-   description          varchar(50),
-   forum_id             int,
-   moderato             varchar(32),
+   id                   int not null auto_increment,
+   name                 varchar(32),
+   description          varchar(64),
+   forumId              int,
+   moderato             int,
+   replyLevel           int,
+   postLevel            int,
+   scanLevel            int,
    primary key (id)
 );
 
@@ -57,12 +73,12 @@ create table SubForum
 /*==============================================================*/
 create table Topic
 (
-   id                   varchar(32) not null,
-   originalPoster       varchar(32),
+   id                   int not null auto_increment,
+   originalPoster       int,
    subforum_id          int,
    postTime             datetime,
    lastreplyTime        datetime,
-   topicContent         text,
+   topicContent         varchar(4048),
    primary key (id)
 );
 
@@ -71,11 +87,13 @@ create table Topic
 /*==============================================================*/
 create table User
 (
-   id                   varchar(32) not null,
-   userName             varchar(20),
-   nickName             varchar(20),
+   id                   int not null auto_increment,
+   userName             varchar(32),
    password             varchar(32),
-   email                varchar(20),
+   email                varchar(64),
+   score                int,
+   currentLevel         int,
+   registerTime         datetime,
    primary key (id)
 );
 
@@ -88,7 +106,7 @@ alter table Reply add constraint FK_Reference_3 foreign key (reply_id)
 alter table Reply add constraint FK_Reference_6 foreign key (replyPoster)
       references User (id);
 
-alter table SubForum add constraint FK_Reference_4 foreign key (forum_id)
+alter table SubForum add constraint FK_Reference_4 foreign key (forumId)
       references Forum (id);
 
 alter table SubForum add constraint FK_Reference_7 foreign key (moderato)

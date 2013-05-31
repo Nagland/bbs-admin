@@ -2,9 +2,10 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
 
 <hibernate-reverse-engineering>
-	<table-filter match-name="forum"></table-filter>
-	<table-filter match-name="reply"></table-filter>
-	<table-filter match-name="subforum"></table-filter>
-	<table-filter match-name="topic"></table-filter>
-	<table-filter match-name="user"></table-filter>
+  <table-filter match-catalog="bbs" match-name="admin"/>
+  <table-filter match-catalog="bbs" match-name="forum"/>
+  <table-filter match-catalog="bbs" match-name="reply"/>
+  <table-filter match-catalog="bbs" match-name="subforum"/>
+  <table-filter match-catalog="bbs" match-name="topic"/>
+  <table-filter match-catalog="bbs" match-name="user"/>
 </hibernate-reverse-engineering>
